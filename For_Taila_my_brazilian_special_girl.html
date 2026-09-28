@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unpublished Manuscript // For Taila</title>
+    <style>
+        :root {
+            --bg-color: #f3eee7; /* Warm light beige background */
+            --paper-bg: #fcfbfa; /* Crisp light parchment paper */
+            --text-color: #2b2b2b; /* Deep charcoal for elegant readability */
+            --accent-color: #9e1b1b; /* Romantic crimson red */
+            --dim-text: #706a63;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .paper {
+            background: var(--paper-bg);
+            border: 1px solid #e0d8ce;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06), 0 2px 10px rgba(158, 27, 27, 0.08);
+            max-width: 680px;
+            width: 100%;
+            padding: 45px;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 0.7rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+            opacity: 0.85;
+        }
+
+        h1 {
+            font-size: 1.35rem;
+            color: var(--accent-color);
+            border-bottom: 1px dashed #d8c3c3;
+            padding-bottom: 12px;
+            margin-bottom: 28px;
+            letter-spacing: 1px;
+        }
+
+        .content {
+            line-height: 1.85;
+            font-size: 1.05rem;
+            white-space: pre-wrap;
+            min-height: 180px;
+        }
+
+        /* Redacted hover effect adapted for light background */
+        .redacted {
+            background-color: #2b2b2b;
+            color: #2b2b2b;
+            padding: 2px 6px;
+            border-radius: 2px;
+            transition: all 0.35s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .redacted:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+            font-weight: bold;
+            border-bottom: 1.5px solid var(--accent-color);
+        }
+
+        .controls {
+            margin-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed #e0d8ce;
+            padding-top: 20px;
+        }
+
+        button {
+            background: #ffffff;
+            color: var(--accent-color);
+            border: 1.5px solid var(--accent-color);
+            padding: 10px 22px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+
+        button:hover {
+            background: var(--accent-color);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(158, 27, 27, 0.25);
+        }
+
+        .page-indicator {
+            color: var(--dim-text);
+            font-size: 0.85rem;
+        }
+
+        #lock-screen {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        input[type="password"] {
+            background: #f7f3ed;
+            border: 1.5px solid var(--accent-color);
+            color: #2b2b2b;
+            padding: 12px;
+            font-family: inherit;
+            text-align: center;
+            margin-top: 20px;
+            width: 240px;
+            border-radius: 3px;
+            font-size: 1rem;
+        }
+        
+        input[type="password"]:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(158, 27, 27, 0.3);
+            background: #fff;
+        }
+
+        .riddle-box {
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #f7f0ea;
+            border: 1px dashed #cbb1b1;
+            border-radius: 4px;
+            font-size: 0.92rem;
+            color: #5c2222;
+            line-height: 1.6;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .hint-btn {
+            font-size: 0.8rem;
+            border: none;
+            color: var(--dim-text);
+            background: transparent;
+            text-decoration: underline;
+            padding: 0;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        .hint-btn:hover {
+            color: var(--accent-color);
+            background: transparent;
+            box-shadow: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="paper">
+    <div class="watermark">RESTRICTED // EYES ONLY</div>
+
+    <!-- Lock Screen -->
+    <div id="lock-screen">
+        <h1>UNPUBLISHED MANUSCRIPT</h1>
+        <p style="color: #555;">Some stories aren't written for the world—only for one specific person.</p>
+        <p style="font-size: 0.9rem; color: var(--dim-text);">Enter the passphrase to unlock these pages:</p>
+        
+        <input type="password" id="pass-input" placeholder="Secret key..." autofocus>
+        <br><br>
+        <button onclick="unlock()">UNLOCK MANUSCRIPT</button>
+        <br>
+        <button class="hint-btn" onclick="toggleRiddle()">Need a clue?</button>
+
+        <div id="riddle-box" class="riddle-box">
+            <span style="color: var(--accent-color); font-weight: bold;">[ RIDDLE CLUE ]</span><br>
+            "Where did our story outside first begin?<br>
+            A tranquil place in Cork, surrounded by water and birds,<br>
+            where two paths crossed for our very first date..."
+        </div>
+
+        <p id="error-msg" style="color: var(--accent-color); font-size: 0.85rem; margin-top: 15px; display: none;">
+            Incorrect key. Read the clue above...
+        </p>
+    </div>
+
+    <!-- Manuscript Reader -->
+    <div id="manuscript" style="display: none;">
+        <h1 id="chapter-title">CHAPTER I</h1>
+        <div class="content" id="typewriter-text"></div>
+        
+        <div class="controls">
+            <span class="page-indicator" id="page-num">Page 1 of 3</span>
+            <button id="next-btn" onclick="nextChapter()">CONTINUE READING &rarr;</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Acceptable keys
+    const VALID_KEYS = ["lough park", "loughpark", "lough"]; 
+
+    // Story chapters
+    const chapters = [
+        {
+            title: "CHAPTER I: THE PLOT TWIST",
+            text: "I came to Ireland expecting to explore beautiful landscapes and immerse myself in its culture, never anticipating that Cork had something far greater waiting for me.\n\nFrom that very first day, behind your quiet and shy presence, I felt you were hiding something truly extraordinary. You were reserved, but I was instantly determined to earn your trust and discover the incredible person within—the kind of soul that captivates you completely and makes you never want to let go.\n\n(Hover over the line to reveal what was left unsaid):\n<span class='redacted'>I knew right then that meeting you was going to change everything.</span>"
+        },
+        {
+            title: "CHAPTER II: THE MYSTERY",
+            text: "When I learned your favorite books were romantic suspense novels, everything clicked.\n\nYou became the ultimate mystery I wanted to solve—not to change you, but to prove to you that I am worth taking a chance on and that I want to be by your side.\n\n<span class='redacted'>And honestly, you still take my breath away every single day.</span>"
+        },
+        {
+            title: "CHAPTER III: THE FINAL PAGE",
+            text: "I know things have felt a bit heavy or overwhelming lately, Taila.\n\nSo I wrote this little program to remind you of something essential: you don't have to carry everything by yourself, and you are so deeply cared for.\n\nThank you for being my favorite person, my favorite mystery, and my favorite story.\n\n<span class='redacted'>End of manuscript. (Or rather, just the beginning of our next chapter). ❤️</span>"
+        }
+    ];
+
+    let currentChapter = 0;
+
+    function unlock() {
+        const input = document.getElementById("pass-input").value.trim().toLowerCase();
+        
+        if (VALID_KEYS.includes(input)) {
+            document.getElementById("lock-screen").style.display = "none";
+            document.getElementById("manuscript").style.display = "block";
+            loadChapter(0);
+        } else {
+            document.getElementById("error-msg").style.display = "block";
+            document.getElementById("riddle-box").style.display = "block";
+        }
+    }
+
+    function toggleRiddle() {
+        const box = document.getElementById("riddle-box");
+        box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+
+    document.getElementById("pass-input").addEventListener("keypress", function(e) {
+        if (e.key === "Enter") unlock();
+    });
+
+    function loadChapter(index) {
+        currentChapter = index;
+        document.getElementById("chapter-title").innerText = chapters[index].title;
+        document.getElementById("page-num").innerText = `Page ${index + 1} of ${chapters.length}`;
+        
+        const container = document.getElementById("typewriter-text");
+        container.innerHTML = chapters[index].text;
+
+        if (index === chapters.length - 1) {
+            document.getElementById("next-btn").innerText = "READ AGAIN ↺";
+        } else {
+            document.getElementById("next-btn").innerText = "CONTINUE READING →";
+        }
+    }
+
+    function nextChapter() {
+        if (currentChapter < chapters.length - 1) {
+            loadChapter(currentChapter + 1);
+        } else {
+            loadChapter(0);
+        }
+    }
+</script>
+
+</body>
+</html>
